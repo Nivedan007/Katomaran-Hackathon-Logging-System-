@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FaceLog Control Room</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">FL</span><span>FaceLog <small>CONTROL ROOM</small></span></div>
+      <div class="live-state"><span class="pulse"></span><span id="connection-label">Checking system</span></div>
+    </header>
+
+    <section class="hero">
+      <div><p class="eyebrow">PERSON MOVEMENT / AUDIT</p><h1>Camera intelligence,<br><em>accountable by design.</em></h1><p class="lede">A live record of who entered, who exited, and what the system observed along the way.</p></div>
+      <div class="source-card"><span class="label">ACTIVE INPUT</span><strong>{{ source_kind }}</strong><code>{{ source }}</code><span class="source-note">MongoDB-backed event stream</span><div id="identity-card" class="identity-card">Loading identity...</div></div>
+    </section>
+
+    <section class="stats" aria-label="Today's statistics">
+      <article class="stat"><span class="stat-label">EVENTS TODAY</span><strong id="today-total">--</strong><span class="stat-foot">all movement</span></article>
+      <article class="stat entry"><span class="stat-label">ENTRIES</span><strong id="today-entries">--</strong><span class="stat-foot">faces detected in</span></article>
+      <article class="stat exit"><span class="stat-label">EXITS</span><strong id="today-exits">--</strong><span class="stat-foot">faces detected out</span></article>
+      <article class="stat"><span class="stat-label">REGISTERED</span><strong id="known-faces">--</strong><span class="stat-foot">known identities</span></article>
+    </section>
+
+    <section class="workspace">
+      <div class="panel events-panel"><div class="panel-head"><div><span class="eyebrow">PRIMARY FEED</span><h2>Movement events</h2></div><span class="refresh-note">Auto-refresh 5s</span></div><div id="events" class="event-list"><div class="empty">Waiting for MongoDB events...</div></div></div>
+      <aside class="panel audit-panel"><div class="panel-head"><div><span class="eyebrow">SYSTEM TRACE</span><h2>Audit activity</h2></div></div><div id="audit" class="audit-list"><div class="empty">No audit activity yet.</div></div></aside>
+    </section>
+    <footer><span>FACELOG / LOCAL OPERATIONS</span><span>UTC timestamps · immutable event IDs</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
