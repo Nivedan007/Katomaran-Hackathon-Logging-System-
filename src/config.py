@@ -19,6 +19,7 @@ class Settings:
     login_username: str = field(default_factory=lambda: os.getenv("LOGIN_USERNAME", "nivedan"))
     login_password: str = field(default_factory=lambda: os.getenv("LOGIN_PASSWORD", "change-me"))
     secret_key: str = field(default_factory=lambda: os.getenv("SECRET_KEY", "local-development-secret"))
+    web_port: int = field(default_factory=lambda: int(os.getenv("WEB_PORT", "5050")))
     rtsp_reconnect_attempts: int = field(default_factory=lambda: int(os.getenv("RTSP_RECONNECT_ATTEMPTS", "3")))
     rtsp_reconnect_delay: float = field(default_factory=lambda: float(os.getenv("RTSP_RECONNECT_DELAY", "2.0")))
     log_root: Path = field(default_factory=lambda: Path(os.getenv("LOG_ROOT", "logs")))

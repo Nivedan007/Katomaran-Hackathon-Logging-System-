@@ -112,5 +112,7 @@ def _json_safe(items: list[dict]) -> list[dict]:
 
 
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:5000")
-    create_app().run(host="127.0.0.1", port=5000, debug=False)
+    settings = Settings()
+    url = f"http://127.0.0.1:{settings.web_port}"
+    webbrowser.open(url)
+    create_app().run(host="127.0.0.1", port=settings.web_port, debug=False)
