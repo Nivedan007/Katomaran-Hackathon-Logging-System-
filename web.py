@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from pathlib import Path
+import webbrowser
 
 from flask import Flask, jsonify, redirect, render_template, request, send_file, session, url_for
 import hmac
@@ -111,4 +112,5 @@ def _json_safe(items: list[dict]) -> list[dict]:
 
 
 if __name__ == "__main__":
+    webbrowser.open("http://127.0.0.1:5000")
     create_app().run(host="127.0.0.1", port=5000, debug=False)

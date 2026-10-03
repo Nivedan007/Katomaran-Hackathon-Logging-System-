@@ -33,6 +33,14 @@ cp .env.example .env
 
 The dashboard uses a login page. Set `LOGIN_USERNAME`, `LOGIN_PASSWORD`, and `SECRET_KEY` in `.env` before starting the web server. The example defaults are suitable only for local development.
 
+Start the dashboard and open it in your external system browser automatically:
+
+```bash
+python web.py
+```
+
+You can also open it manually in Safari, Chrome, or Firefox at `http://127.0.0.1:5000`.
+
 4. Register your face before starting the logger. Use a clear image containing your face:
 
 ```bash
