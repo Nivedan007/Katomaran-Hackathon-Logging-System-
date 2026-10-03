@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
 from pathlib import Path
 
-from flask import Flask, jsonify, render_template, send_file
+from flask import Flask, jsonify, redirect, render_template, request, send_file, session, url_for
+import hmac
 
 from src.config import Settings
 
@@ -9,6 +10,34 @@ from src.config import Settings
 def create_app() -> Flask:
     settings = Settings()
     app = Flask(__name__, template_folder="web/templates", static_folder="web/static")
+    app.secret_key = settings.secret_key
+
+    @app.before_request
+    def require_login():
+        if request.endpoint in {"login", "static"}:
+            return None
+        if session.get("authenticated"):
+            return None
+        if request.path.startswith(("/api/", "/media/")):
+            return jsonify({"ok": False, "error": "authentication_required"}), 401
+        return redirect(url_for("login"))
+
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        error = None
+        if request.method == "POST":
+            username = request.form.get("username", "")
+            password = request.form.get("password", "")
+            if hmac.compare_digest(username, settings.login_username) and hmac.compare_digest(password, settings.login_password):
+                session["authenticated"] = True
+                return redirect(url_for("dashboard"))
+            error = "Invalid username or password"
+        return render_template("login.html", error=error)
+
+    @app.get("/logout")
+    def logout():
+        session.clear()
+        return redirect(url_for("login"))
 
     def mongo_database():
         from pymongo import MongoClient

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | FaceLog</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <div class="brand"><span class="brand-mark">FL</span><span>FaceLog <small>CONTROL ROOM</small></span></div>
+    <section class="login-card">
+      <span class="eyebrow">SECURE ACCESS</span>
+      <h1>Welcome back.</h1>
+      <p>Sign in to view movement events and system audit data.</p>
+      {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+      <form method="post">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" required autofocus>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button type="submit">Enter control room <span>-></span></button>
+      </form>
+    </section>
+    <span class="login-foot">PRIVATE MOVEMENT LOG / AUTHENTICATED SESSION</span>
+  </main>
+</body>
+</html>

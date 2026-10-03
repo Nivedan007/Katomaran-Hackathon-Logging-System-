@@ -31,6 +31,8 @@ cp .env.example .env
 2. Start MongoDB locally, or set `MONGODB_URI` in `.env`.
 3. Grant camera access to the application launching Python. On macOS, open **System Settings > Privacy & Security > Camera**, enable access for Terminal or VS Code, then fully restart that application.
 
+The dashboard uses a login page. Set `LOGIN_USERNAME`, `LOGIN_PASSWORD`, and `SECRET_KEY` in `.env` before starting the web server. The example defaults are suitable only for local development.
+
 4. Register your face before starting the logger. Use a clear image containing your face:
 
 ```bash
